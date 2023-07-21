@@ -37,6 +37,12 @@ function App() {
               <li key={idx}>{activity}</li>
             ))}
           </ul>
+          <p>Campgrounds:</p>
+          <ul>
+            {selectedPark.campgrounds.split(", ").map((campground, idx) => (
+              <li key={idx}>{campground}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
