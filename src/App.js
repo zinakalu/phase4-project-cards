@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
 function App() {
+  const [data, setData] = useState([]);
+  const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5555/parks")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  const handleStateClick = (park) => {
+    setSelectedPark(park);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {data.map((park, index) => (
+        <div key={index} onClick={() => handleStateClick(park)}>
+          <h2>{park.name}</h2>
+        </div>
+      ))}
+      {selectedPark && (
+        <div>
+          <h2>{selectedPark.name}</h2>
+          <p>{selectedPark.location}</p>
+          <p>Activities:</p>
+          <ul>
+            {selectedPark.activities.split(", ").map((activity, idx) => (
+              <li key={idx}>{activity}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
