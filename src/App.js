@@ -43,6 +43,18 @@ function App() {
               <li key={idx}>{campground}</li>
             ))}
           </ul>
+          {selectedPark.videos && (
+            <div>
+              <p>Video:</p>
+              <a
+                href={selectedPark.videos}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Watch on YouTube
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>
