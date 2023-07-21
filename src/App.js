@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import StateCard from "./StateCard";
+import "./App.css";
 
 function App() {
   const [data, setData] = useState([]);
@@ -15,14 +17,18 @@ function App() {
   };
 
   return (
-    <div>
-      {data.map((park, index) => (
-        <div key={index} onClick={() => handleStateClick(park)}>
-          <h2>{park.name}</h2>
-        </div>
-      ))}
+    <div className="app-container">
+      <div className="card-container">
+        {data.map((park, index) => (
+          <StateCard
+            key={index}
+            stateName={park.name}
+            fetchStateDetails={() => handleStateClick(park)}
+          />
+        ))}
+      </div>
       {selectedPark && (
-        <div>
+        <div className="park-details">
           <h2>{selectedPark.name}</h2>
           <p>{selectedPark.location}</p>
           <p>Activities:</p>
